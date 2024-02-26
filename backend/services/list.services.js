@@ -4,6 +4,14 @@ const userService = new userServices();
 
 
 export default class listServices {
+    async getListById(id) {
+        return await list.findById(id);
+    }
+
+    async updateList(id, data){
+        return await list.findByIdAndUpdate(id, data);
+    }
+
     async newList(name, userId) {
         const newList = await list.create({ name, userId});
     

@@ -1,5 +1,4 @@
 import { user } from "../models/user.model.js";
-import { list } from "../models/lists.model.js";
 
 export default class userServices {
     async findUserByEmail(email) {

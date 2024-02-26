@@ -5,6 +5,7 @@ import userRoutes from './routes/user.routes.js';
 import listRoutes from './routes/list.routes.js';
 
 import { db }  from './utils/db.js';
+import taskRoutes from './routes/task.routes.js';
 db();
 const fastify = Fastify({
   logger: true,
@@ -42,6 +43,17 @@ fastify.register(
     done();
   },
   { prefix: '/api/list' }
+);
+
+fastify.register(
+  function(task, _, done) {
+    taskRoutes.forEach((route)=> {
+      task.route(route);
+    });
+    
+    done();
+  },
+  { prefix: '/api/task' }
 );
 
 fastify.listen({ port: process.env.PORT }, function (err, address) {
