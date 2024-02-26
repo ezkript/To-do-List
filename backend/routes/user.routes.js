@@ -6,7 +6,7 @@ const userRoutes = [
         url: '/:email',
         method: 'get',
         handler: user.findUserByEmail,
-    },
+    }
 ];
 
 export default userRoutes;
