@@ -12,6 +12,11 @@ const listRoutes = [
         url: '/:id',
         method: 'delete',
         handler: list.removeList,
+    },
+    {
+        url: '/all',
+        method: 'get',
+        handler: list.getLists,
     }
 ];
 

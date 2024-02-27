@@ -5,18 +5,41 @@ const jwt = new JwtUtils();
 const tasksService = new tasksServices();
 
 export default class taskController {
+    async getTasks(request, reply) {
+        try {
+            const { id } = request.params;
+    
+            const { token } = request.headers;
+            if(!token) return reply.code(403).send({ message: "Token not found" });
+            const decodedToken = jwt.verifyToken(token, process.env.JWT_SECRET);
+           
+            const tasks = await tasksService.getTasks(id, decodedToken.id);
+    
+            return tasks === 'Unauthorized' 
+                ? reply.code(401).send({message: "You can't see the tasks from this list"})
+                : reply.code(200).send({tasks});
+        } catch (error) {
+            console.log("error while getting tasks: " + error );
+        }
+    }
+    
     async toggleTask(request, reply) {
-        const { id } = request.params;
-
-        const { token } = request.headers;
-        if(!token) return reply.code(403).send({ message: "Token not found" });
-        const decodedToken = jwt.verifyToken(token, process.env.JWT_SECRET);
-
-        const taskUpdated = await tasksService.toggleTask(id, decodedToken.id);
-
-        return taskUpdated !== 'Unauthorized'
-            ? reply.code(200).send({ message: "The task has been toggled", task: taskUpdated })
-            : reply.code(401).send({ message: "You don't have permissions to update this task!" });
+        try {
+            const { id } = request.params;
+    
+            const { token } = request.headers;
+            if(!token) return reply.code(403).send({ message: "Token not found" });
+            const decodedToken = jwt.verifyToken(token, process.env.JWT_SECRET);
+    
+            const taskUpdated = await tasksService.toggleTask(id, decodedToken.id);
+    
+            return taskUpdated !== 'Unauthorized'
+                ? reply.code(200).send({ message: "The task has been toggled", task: taskUpdated })
+                : reply.code(401).send({ message: "You don't have permissions to update this task!" });
+            
+        } catch (error) {
+            console.log("error while trying to toggle a task: " + error);
+        }
     }
 
     async createNewTask(request, reply) {

@@ -17,6 +17,11 @@ const taskRoutes = [
         url: '/toggle/:id',
         method: 'patch',
         handler: task.toggleTask,
+    },
+    {
+        url: '/all/:id',
+        method: 'get',
+        handler: task.getTasks,
     }
 ];
 

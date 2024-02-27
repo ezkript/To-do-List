@@ -3,6 +3,15 @@ import listServices from "./list.services.js";
 const listService = new listServices();
 
 export default class tasksServices {
+    async getTasks(listId, userId){
+        const list = await listService.getListById(listId);
+        if(list.userId!==userId) return 'Unauthorized';
+
+        const tasks = await task.find({ listId });
+
+        return tasks;
+    }
+
     async getTaskById(id) {
         return await task.findById(id);
     }

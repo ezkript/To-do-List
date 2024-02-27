@@ -48,6 +48,15 @@ export const removeList = async (id) => {
     }
 };
 
+export const getLists = async () => {
+    try {
+      const response = await API.delete(`/list/all`, { headers: getAuthHeaders() });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+};
+
 /*---------------------- TASK --------------------*/
 
 export const createTask = async (listId, data) => {
@@ -70,7 +79,16 @@ export const removeTask = async (id, listId) => {
 
 export const toggleTask = async (id) => {
     try {
-      const response = await API.delete(`/task/toggle/${id}`, { headers: getAuthHeaders() });
+      const response = await API.patch(`/task/toggle/${id}`, { headers: getAuthHeaders() });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+};
+
+export const getTasks = async (id) => {
+    try {
+      const response = await API.get(`/task/all/${id}`, { headers: getAuthHeaders() });
       return response.data;
     } catch (error) {
       throw error;

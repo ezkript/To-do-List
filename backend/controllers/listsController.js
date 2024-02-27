@@ -4,6 +4,16 @@ const listService = new listServices();
 const jwt = new JwtUtils();
 
 export default class listsController {
+    async getLists(request, reply) {
+        try {
+            const decodedToken = jwt.verifyToken(request.headers.token, process.env.JWT_SECRET);
+            const lists = await listService.getLists(decodedToken.id);
+            return reply.code(200).send({ lists });
+        } catch (error) {
+            console.log("Error while getting lists");
+        }
+    }
+
     async createNewList(request, reply) {
         try {
             const { name  } = request.body;

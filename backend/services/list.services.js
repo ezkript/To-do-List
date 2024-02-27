@@ -4,6 +4,9 @@ const userService = new userServices();
 
 
 export default class listServices {
+    async getLists(userId) {
+        return await list.find({ userId });
+    }
     async getListById(id) {
         return await list.findById(id);
     }
