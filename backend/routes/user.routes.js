@@ -6,6 +6,11 @@ const userRoutes = [
         url: '/:email',
         method: 'get',
         handler: user.findUserByEmail,
+    },
+    {
+        url: '/me',
+        method: 'get',
+        handler: user.showMe,
     }
 ];
 

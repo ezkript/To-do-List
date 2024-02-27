@@ -4,7 +4,7 @@ const listService = new listServices();
 
 export default class tasksServices {
     async getTasks(listId, userId){
-        const list = await listService.getListById(listId);
+        const list = await listService.getListById(listId, userId);
         if(list.userId!==userId) return 'Unauthorized';
 
         const tasks = await task.find({ listId });
@@ -19,7 +19,7 @@ export default class tasksServices {
     async toggleTask(id, userId) {
         const getTask = await this.getTaskById(id);
         
-        const list = await listService.getListById(getTask.listId);
+        const list = await listService.getListById(getTask.listId, userId);
         if (list.userId !== userId) return 'Unauthorized';
 
         const taskToggled = getTask.done 
@@ -30,7 +30,7 @@ export default class tasksServices {
     }
 
     async newTask(data, userId) {
-        const list = await listService.getListById(data.listId);
+        const list = await listService.getListById(data.listId, userId);
 
         if (!list) return "List not found";
         if (list.userId !== userId) return "Unauthorized";
@@ -50,7 +50,7 @@ export default class tasksServices {
     }
 
     async removeTask(id, listId, userId) {
-        const list = await listService.getListById(listId);
+        const list = await listService.getListById(listId, userId);
     
         if (list.userId !== userId) return 'Unauthorized';
     

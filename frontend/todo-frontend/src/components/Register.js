@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Container, Center, Paper, TextInput, Button, Text, Anchor, Alert } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
-import '@mantine/core/styles.css';
 import Cookies from 'js-cookie';
 import { login, register } from '../api';
 

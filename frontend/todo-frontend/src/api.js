@@ -16,7 +16,7 @@ export const login = async (credentials) => {
     return response.data;
   } catch (error) {
     throw error;
-  }
+  };
 };
 
 export const register = async (data) => {
@@ -25,7 +25,18 @@ export const register = async (data) => {
     return response.data;
   } catch (error) {
     throw error;
-  }
+  };
+};
+
+/* --------------------- USER ------------------------ */
+
+export const showMe = async () => {
+  try {
+    const response = await API.get('/user/me', {headers: getAuthHeaders() });
+    return response.data;
+  } catch (error) {
+    throw error;
+  };
 };
 
 /* --------------------- LIST ------------------------ */
@@ -36,7 +47,7 @@ export const createList = async (data) => {
       return response.data;
     } catch (error) {
       throw error;
-    }
+    };
 };
 
 export const removeList = async (id) => {
@@ -45,16 +56,25 @@ export const removeList = async (id) => {
       return response.data;
     } catch (error) {
       throw error;
-    }
+    };
 };
 
 export const getLists = async () => {
     try {
-      const response = await API.delete(`/list/all`, { headers: getAuthHeaders() });
+      const response = await API.get(`/list/all`, { headers: getAuthHeaders() });
       return response.data;
     } catch (error) {
       throw error;
-    }
+    };
+};
+
+export const getListById = async (id) => {
+    try {
+      const response = await API.get(`/list/${id}`, { headers: getAuthHeaders() });
+      return response.data;
+    } catch (error) {
+      throw error;
+    };
 };
 
 /*---------------------- TASK --------------------*/
@@ -65,7 +85,7 @@ export const createTask = async (listId, data) => {
       return response.data;
     } catch (error) {
       throw error;
-    }
+    };
 };
 
 export const removeTask = async (id, listId) => {
@@ -74,7 +94,7 @@ export const removeTask = async (id, listId) => {
       return response.data;
     } catch (error) {
       throw error;
-    }
+    };
 };
 
 export const toggleTask = async (id) => {
@@ -83,7 +103,7 @@ export const toggleTask = async (id) => {
       return response.data;
     } catch (error) {
       throw error;
-    }
+    };
 };
 
 export const getTasks = async (id) => {
@@ -92,5 +112,5 @@ export const getTasks = async (id) => {
       return response.data;
     } catch (error) {
       throw error;
-    }
+    };
 };

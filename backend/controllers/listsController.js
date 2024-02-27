@@ -4,6 +4,18 @@ const listService = new listServices();
 const jwt = new JwtUtils();
 
 export default class listsController {
+    async getListById(request, reply) {
+        try {
+            const {id} = request.params;
+            const decodedToken = jwt.verifyToken(request.headers.token, process.env.JWT_SECRET);
+            const list = await listService.getListById(id, decodedToken.id);
+            return list!=='Unauthorized'
+                ? reply.code(200).send({list})
+                : reply.code(401).send({message: "You can't see this list"});
+        } catch (error) {
+            console.log("Error while getting a list");
+        }
+    }
     async getLists(request, reply) {
         try {
             const decodedToken = jwt.verifyToken(request.headers.token, process.env.JWT_SECRET);

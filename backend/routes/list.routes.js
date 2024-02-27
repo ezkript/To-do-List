@@ -17,7 +17,12 @@ const listRoutes = [
         url: '/all',
         method: 'get',
         handler: list.getLists,
-    }
+    },
+    {
+        url: '/:id',
+        method: 'get',
+        handler: list.getListById,
+    },
 ];
 
 export default listRoutes;

@@ -7,8 +7,12 @@ export default class listServices {
     async getLists(userId) {
         return await list.find({ userId });
     }
-    async getListById(id) {
-        return await list.findById(id);
+    async getListById(id, userId) {
+        const listFound = await list.findById(id);
+
+        if(listFound.userId !== userId) return 'Unauthorized';
+
+        return listFound;
     }
 
     async updateList(id, data){
