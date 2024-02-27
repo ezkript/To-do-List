@@ -3,7 +3,7 @@ import "dotenv/config";
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
 import listRoutes from './routes/list.routes.js';
-
+import cors from '@fastify/cors';
 import { db }  from './utils/db.js';
 import taskRoutes from './routes/task.routes.js';
 db();
@@ -11,6 +11,7 @@ const fastify = Fastify({
   logger: true,
 });
 
+await fastify.register(cors);
 
 fastify.register(
   function(auth, _, done) {

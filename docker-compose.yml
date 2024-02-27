@@ -9,4 +9,9 @@ services:
   backend:
     build: ./backend
     ports:
-      - "4000:4000"
+      - "4001:4001"
+    environment:
+      - PORT=4001
+      - JWT_SECRET=require('crypto').randomBytes(64).toString('hex')
+      - JWT_EXPIRES_IN=60m
+      - DB_URI=mongodb+srv://ezkript:5VgUNxiZByy8jn1y@cluster0.llr1ysu.mongodb.net/
