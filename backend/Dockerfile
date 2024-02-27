@@ -1,12 +1,12 @@
 FROM node:18
 
 WORKDIR /app
-
-COPY package*.json ./
+COPY package.json ./
+COPY .env ./
 
 RUN npm install
 
 COPY . .
-EXPOSE 4001
 
+EXPOSE 4001
 CMD [ "npm", "run", "dev" ]
