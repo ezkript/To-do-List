@@ -10,6 +10,7 @@ const TaskList = () => {
   const [user, setUser] = useState("Usuario");
 
   useEffect(() => {
+    document.title = 'Listas';
     async function fetchData() {
       try {
         const userData = await showMe();
@@ -52,10 +53,6 @@ const TaskList = () => {
         console.error('Error removing list:', error);
       }
     }
-  };
-
-  const handleListClick = (index) => {
-    setSelectedList(index);
   };
 
   return (

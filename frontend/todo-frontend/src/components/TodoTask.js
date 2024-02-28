@@ -15,10 +15,12 @@ const TaskPage = () => {
 
   React.useEffect(() => {
     async function fetchTasks() {
+      document.title = "Tareas";
       try {
         const tasksData = await getTasks(listId);
         const getList = await getListById(listId);
         setListName(getList.list.name)
+        document.title = "Tareas" + ` - ${getList.list.name}`;
         setTasks(tasksData.tasks);
       } catch (error) {
         console.error('Error fetching tasks:', error);

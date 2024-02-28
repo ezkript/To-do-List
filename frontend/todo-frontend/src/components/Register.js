@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Center, Paper, TextInput, Button, Text, Anchor, Alert } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 import Cookies from 'js-cookie';
@@ -13,6 +13,10 @@ const RegisterForm = () => {
     const [name, setName] = useState('');
     const icon = <IconInfoCircle />;
 
+    useEffect(() => {
+        document.title = 'Registrarse';
+    }, []);
+    
     const handleRegister = async () => {
         try {
             if (password !== confirmPassword) {

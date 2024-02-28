@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, TextInput, Button, Paper, Center, Alert, Box, Text, Anchor } from '@mantine/core';
 import { IconInfoCircle } from '@tabler/icons-react';
 import { login } from '../api';
@@ -8,7 +8,12 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(false);
+  
   const icon = <IconInfoCircle />;
+
+  useEffect(() => {
+    document.title = 'Iniciar sesión';
+  }, []);
 
   const handleLogin = async () => {
     try {
