@@ -11,7 +11,6 @@ const TaskPage = () => {
   const [listName, setListName] = React.useState("")
   const handleTitleChange = (event) => setNewTaskTitle(event.target.value);
   const handleDescriptionChange = (event) => setNewTaskDescription(event.target.value);
-  
 
   React.useEffect(() => {
     async function fetchTasks() {
