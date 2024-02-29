@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Container, TextInput, Button, Text, Group } from '@mantine/core';
-import { showMe, getLists, createList, removeList } from '../api'; // Importar las funciones de la API
+import { Container, TextInput, Button, Text, Group, Center } from '@mantine/core';
+import { showMe, getLists, createList } from '../api';
 import { Link } from 'react-router-dom';
 
 const TaskList = () => {
   const [userLists, setUserLists] = useState([]);
   const [newListName, setNewListName] = useState('');
-  const [selectedList, setSelectedList] = useState(null);
   const [user, setUser] = useState("Usuario");
 
   useEffect(() => {
@@ -43,51 +42,38 @@ const TaskList = () => {
     }
   };
 
-  const handleRemoveList = async () => {
-    if (selectedList !== null) {
-      try {
-        await removeList(userLists[selectedList]._id);
-        setUserLists(userLists.filter((_, index) => index !== selectedList));
-        setSelectedList(null);
-      } catch (error) {
-        console.error('Error removing list:', error);
-      }
-    }
-  };
-
   return (
-    <Container size="md">
-      <Text size="xl" style={{ marginBottom: 16 }}>
-        Listas de {user}
-      </Text>
-      <Group style={{ marginBottom: 16 }}>
-        <TextInput
-          value={newListName}
-          onChange={handleNewListNameChange}
-          placeholder="Nombre de la nueva lista"
-          style={{ marginRight: 8 }}
-        />
-        <Button onClick={handleAddList}>Agregar Lista</Button>
-        {selectedList !== null && (
-          <Button onClick={handleRemoveList} color="red" style={{ marginLeft: 8 }}>
-            Eliminar Lista
-          </Button>
-        )}
-      </Group>
-      <Group direction="column" spacing="xs">
-        {userLists.map((list, index) => (
-          <Link key={index} to={`/mylists/${list._id}`} style={{ textDecoration: "none" }}>
-            <Button
-              fullWidth
-              variant={selectedList === index ? 'filled' : 'outline'}
-              style={{ marginBottom: 8 }}
-            >
-              {list.name}
-            </Button>
-          </Link>
-        ))}
-      </Group>
-    </Container>
+    <Center>
+      <Container size={"100vw"} mih={"100vh"} pt={30}>
+        <Text size="xl" mb={16}>
+          Listas de {user}
+        </Text>
+        <Group mb={16}>
+          <TextInput
+            value={newListName}
+            onChange={handleNewListNameChange}
+            placeholder="Nombre de la nueva lista"
+            mr={8}
+          />
+          <Button onClick={handleAddList}>Agregar Lista</Button>
+        </Group>
+        <Group justify='center' align='center' maw={300}>
+          {userLists.map((list, index) => (
+            <Link key={index} to={`/mylists/${list._id}`}>
+              <Button
+                w={"300"}
+                variant={'outline'}
+                mb={8}
+              >
+                <Text truncate fw={600}>
+                  {list.name}
+                </Text>
+              </Button>
+            </Link>
+          ))}
+        </Group>
+      </Container>
+    </Center>
   );
 };
 

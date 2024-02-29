@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getAuthHeaders } from './utils/headers';
 
-export const API_URL = 'http://127.0.0.1:4001/api';
+export const API_URL = 'https://to-do-list-dev-hkbk.3.us-1.fl0.io/api';
 
 const API = axios.create({
 	baseURL: `${API_URL}`,
